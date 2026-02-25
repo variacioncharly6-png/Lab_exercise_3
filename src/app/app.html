@@ -1,33 +1,61 @@
 <div class="container">
-  <h1>🏍️ Motor Parts Store</h1>
 
-  <div class="products">
-    <div class="card">
-      <h3>Motor Oil</h3>
-      <p>High quality engine oil</p>
-      <p class="price">₱450</p>
-      <button>Add to Cart</button>
-    </div>
+<h1>🏍 Motor Parts Store</h1>
 
-    <div class="card">
-      <h3>Brake Pads</h3>
-      <p>Durable and safe brakes</p>
-      <p class="price">₱650</p>
-      <button>Add to Cart</button>
-    </div>
+<p>Email: {{email}}</p>
+<p>Phone: {{phone}}</p>
 
-    <div class="card">
-      <h3>Spark Plug</h3>
-      <p>Improves engine performance</p>
-      <p class="price">₱180</p>
-      <button>Add to Cart</button>
-    </div>
 
-    <div class="card">
-      <h3>Motor Chain</h3>
-      <p>Heavy duty chain</p>
-      <p class="price">₱1,200</p>
-      <button>Add to Cart</button>
-    </div>
-  </div>
+<div class="cart-box"
+[ngClass]="{
+'cart-green': cartCount > 0,
+'cart-red': cartCount == 0
+}">
+
+<span>🛒 Cart: {{cartCount}}</span>
+
+<span>💰 Total: ₱{{totalPrice}}</span>
+
+</div>
+
+
+
+<div class="product-row">
+
+
+<div *ngFor="let product of products" class="card">
+
+<h3>{{product.name}}</h3>
+
+<p>{{product.description}}</p>
+
+<p>Price: ₱{{product.price}}</p>
+
+
+<p
+[ngClass]="{
+'stock-green': product.stock > 0,
+'stock-red': product.stock == 0
+}">
+
+Stock: {{product.stock}}
+
+</p>
+
+
+<button
+(click)="addToCart(product)"
+[disabled]="product.stock == 0">
+
+Add to Cart
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
 </div>
